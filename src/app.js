@@ -3,13 +3,13 @@ import { View } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducers from './reducers';
-import { Container, Left, Right, Body, Header, Title } from 'native-base';
+import { Left, Right, Body, Header, Title } from 'native-base';
 import LibraryList from './components/LibraryList';
 
 const App = () => {
     return (
         <Provider store={createStore(reducers)}>
-            <View>
+            <View style={ { flex: 1 } }>
                 <Header>
                     <Left/>
                     <Body>
@@ -17,7 +17,7 @@ const App = () => {
                     </Body>
                     <Right />
                 </Header>
-                
+
                 <LibraryList />
             </View>
         </Provider>
