@@ -1,15 +1,35 @@
 import React, { Component } from 'react'
 import { CardSection } from './common'
-import { Text, TouchableWithoutFeedback, View } from 'react-native'
+import { 
+    Text, 
+    TouchableWithoutFeedback, 
+    View,
+    LayoutAnimation,
+    NativeModules
+} from 'react-native'
 import * as actions from '../actions'
 import { connect } from 'react-redux'
 
 class ListItem extends Component {
+    componentWillUpdate() {
+        // Android workaround
+        const { UIManager } = NativeModules
+    
+        UIManager.setLayoutAnimationEnabledExperimental
+            && UIManager.setLayoutAnimationEnabledExperimental(true)
+
+        LayoutAnimation.spring()
+    }
+
     renderDescription() {
         const { library, expanded } = this.props
         if(expanded) {
             return(
-                <Text>{library.item.description}</Text>       
+                <CardSection>
+                    <Text style={{ flex: 1 }}>
+                        {library.item.description}
+                    </Text>  
+                </CardSection>     
             )
         }
     }
